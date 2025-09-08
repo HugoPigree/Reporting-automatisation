@@ -1,0 +1,56 @@
+# V4 - Configuration étendue
+data_source:
+  type: "csv_file"        # "csv_file" | "csv_dir" | "mysql"
+  path: "./data/sales_sample.csv"
+  chunk_size: null        # ex: 200000 pour lire en morceaux les gros CSV
+
+mysql:
+  host: "localhost"
+  port: 3306
+  user: "user"
+  password: "password"
+  database: "mydb"
+  query: |
+    SELECT date, produit, categorie, montant, client
+    FROM ventes
+    WHERE (%(date_start)s IS NULL OR date >= %(date_start)s)
+      AND (%(date_end)s   IS NULL OR date <= %(date_end)s)
+
+column_mapping:
+  date: "date"
+  produit: "produit"
+  categorie: "categorie"
+  montant: "montant"
+  client: "client"
+
+report_dir: "./reports"
+report_prefix: "rapport"
+date_format: "%Y-%m-%d"
+
+period:
+  mode: "last_full_month"   # "last_full_month" | "range"
+  date_start: null
+  date_end: null
+
+# Choix d'affichage
+excel:
+  theme: "light"            # "light" | "dark"
+  top_n_products: 10
+  include_kpis: ["ca_total","ca_M","ca_M1","croissance","ticket_moyen_global"]
+  include_sheets: ["Données","KPI","Dashboard","Par catégorie","Par produit"]
+
+email:
+  enabled: false
+  smtp_host: "smtp.example.com"
+  smtp_port: 587
+  use_tls: true
+  username: "user@example.com"
+  password: "app_password"
+  from_addr: "Reporting Bot <user@example.com>"
+  to_addrs:
+    - "you@company.com"
+  subject: "Rapport ventes — {{DATE}}"
+  html: |
+    <p>Bonjour,</p>
+    <p>Veuillez trouver le rapport du <b>{{DATE}}</b> en pièce jointe.</p>
+    <p>Cordialement,</p>

@@ -1,0 +1,7 @@
+[2025-09-08T16:06:53] Source: {'type': 'csv_file', 'path': './data/sales_sample.csv', 'chunk_size': None}
+[2025-09-08T16:06:53] Période: 2025-08-01 00:00:00 -> 2025-08-31 00:00:00
+[2025-09-08T16:06:53] Calcul KPI...
+[2025-09-08T16:06:53] Génération Excel: C:\Users\Dev\Downloads\reporting_excel_mvp_v4\reports\rapport_2025-09-08.xlsx (theme=light)
+[2025-09-08T16:06:53] Email (si activé)...
+[2025-09-08T16:06:53] Email: OK (ou désactivé).
+[2025-09-08T16:06:53] OK - Rapport généré.
